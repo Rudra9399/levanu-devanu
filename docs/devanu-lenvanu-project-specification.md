@@ -2400,3 +2400,54 @@ When implementing this specification:
 20. Build and test each module before moving to the next module.
 
 The final application should be a clean, small, reliable record-management system that digitally replaces the two physical books used in the current Devanu-Lenvanu workflow.
+
+---
+
+# 62. Mandatory Requirement: Mobile-First Responsive Design
+
+This application will be used **primarily on mobile phones**, so the entire application MUST be designed and developed using a **mobile-first approach**.
+
+Mobile responsiveness is not an optional enhancement. It is a **core functional requirement of Version 1**.
+
+The application must provide an excellent experience on:
+- Small Android phones (320px, 360px, 375px)
+- Large Android phones and iPhones (390px, 414px, 430px)
+- Tablets (768px+)
+- Desktop/laptop screens (1024px, 1280px+)
+
+However, **mobile phone usability must be prioritized over desktop design**.
+
+### 62.1 Mobile-First Navigation
+- Use a bottom navigation bar for high-frequency thumb-reach actions (`Home`, `Customers`, `Work`, `Reports`) and a compact top header with quick `+` actions.
+- Desktop sidebar navigation progressively enhances on large screens (`md:`/`lg:`), while mobile relies on bottom navigation.
+
+### 62.2 Touch-Friendly UI & Hit Targets
+- Minimum 44px touch target sizes for buttons, inputs, dropdown items, and clickable rows.
+- Zero reliance on `:hover` for critical functionality or data visibility.
+- Adequate spacing between interactive elements to prevent accidental taps.
+
+### 62.3 Mobile-First Forms & Keyboard Optimization
+- Single-column vertical layout (`Label` → `Input` → `Helper/Error`).
+- Proper input types for native mobile keyboards:
+  - Phone numbers: `type="tel"`
+  - Quantities / Heads / Pieces: `type="number"` / `inputmode="numeric"`
+  - Rates / Money: `type="number"` with `step="0.01"` / `inputmode="decimal"`
+  - Dates: `type="date"`
+  - Search: `type="search"`
+- Sticky primary action footer for long forms (`[ Save Work ]`, `[ Complete Return ]`) without obscuring inputs.
+
+### 62.4 Responsive Data Presentation: Cards over Tables
+- Mobile presents transactions, customers, designs, and monthly reports as structured, tap-friendly **Card / List items**.
+- Horizontal multi-column tables are reserved for tablet/desktop (`md:`, `lg:`) or enclosed in controlled horizontal scroll containers with visual swipe indicators.
+
+### 62.5 Priority Order for Design & Development Decisions
+1. Mobile Usability (One-handed touch flow)
+2. Data Correctness & Invariant Enforcement
+3. Rapid Transaction Entry Speed
+4. Readability & Clear Contrast
+5. Touch Accessibility ($\ge 44\text{px}$)
+6. Performance & Zero Unwanted Layout Shifts
+7. Tablet Experience
+8. Desktop Experience
+9. Visual Polish
+
