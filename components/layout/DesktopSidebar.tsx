@@ -15,6 +15,7 @@ import {
   ChevronRight,
   GitPullRequest,
 } from "lucide-react";
+import { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { InstallAppButton } from "@/components/pwa/InstallAppButton";
 
@@ -79,7 +80,7 @@ const SIDEBAR_ITEMS = [
   },
 ];
 
-export function DesktopSidebar() {
+function DesktopSidebarContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchString = searchParams?.toString() || "";
@@ -160,6 +161,30 @@ export function DesktopSidebar() {
         </div>
       </div>
     </aside>
+  );
+}
+
+export function DesktopSidebar() {
+  return (
+    <Suspense
+      fallback={
+        <aside className="hidden md:flex flex-col w-64 border-r border-slate-200/80 bg-white min-h-screen shrink-0 shadow-2xs">
+          <div className="p-5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-lg">
+                DL
+              </div>
+              <div>
+                <h1 className="font-bold text-slate-900 text-sm">Devanu - Lenvanu</h1>
+                <p className="text-[11px] text-slate-400">Piece & Work Register</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      }
+    >
+      <DesktopSidebarContent />
+    </Suspense>
   );
 }
 
