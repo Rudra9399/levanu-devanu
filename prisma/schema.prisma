@@ -1,0 +1,210 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TransactionStatus {
+  PENDING
+  PARTIALLY_RETURNED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PARTIALLY_PAID
+  PAID
+}
+
+enum RateUnit {
+  PER_PIECE
+  PER_HEAD
+}
+
+// Master 1: Color Master
+model ColorMaster {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  colorRows WorkTransactionColor[]
+
+  @@index([name])
+}
+
+// Master 2: Material / Category Master (Net, Velvet, Packing, etc.)
+model CategoryMaster {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions WorkTransaction[]
+
+  @@index([name])
+}
+
+// Master 3: Cutting / Work Type Master (Katar Cutting, Reniya Cutting, etc.)
+model CuttingMaster {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions WorkTransaction[]
+
+  @@index([name])
+}
+
+// Master 4: Design Number Master (Design Code string only)
+model DesignNumberMaster {
+  id           String   @id @default(cuid())
+  designNumber String   @unique
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  transactions WorkTransaction[]
+
+  @@index([designNumber])
+}
+
+// Worker / Customer Directory
+model Customer {
+  id          String   @id @default(cuid())
+  name        String
+  phoneNumber String?
+  address     String?
+  notes       String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  transactions WorkTransaction[]
+  payments     Payment[]
+
+  @@index([name])
+  @@index([phoneNumber])
+  @@index([isActive])
+}
+
+// Work Transaction / Devanu & Lenvanu Parent Ledger
+model WorkTransaction {
+  id                   String            @id @default(cuid())
+  customerId           String
+  designNumberId       String?
+  designNumberSnapshot String
+
+  categoryId           String?
+  categorySnapshot     String?
+
+  cuttingStyleId       String?
+  cuttingStyleSnapshot String?
+
+  issueDate            DateTime
+  returnDate           DateTime?
+
+  totalGivenPieces     Int               @default(0)
+  totalReturnedPieces  Int               @default(0)
+  totalDamagedPieces   Int               @default(0)
+
+  totalAmount          Decimal           @default(0) @db.Decimal(10, 2)
+
+  workStatus           TransactionStatus @default(PENDING)
+  paymentStatus        PaymentStatus     @default(UNPAID)
+
+  notes                String?
+
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  customer             Customer            @relation(fields: [customerId], references: [id])
+  designNumber         DesignNumberMaster? @relation(fields: [designNumberId], references: [id])
+  category             CategoryMaster?     @relation(fields: [categoryId], references: [id])
+  cuttingStyle         CuttingMaster?      @relation(fields: [cuttingStyleId], references: [id])
+
+  colorRows            WorkTransactionColor[]
+  paymentAllocations   PaymentAllocation[]
+
+  @@index([customerId])
+  @@index([designNumberId])
+  @@index([issueDate])
+  @@index([workStatus])
+  @@index([paymentStatus])
+}
+
+// Child: Color-wise calculation rows on Work Transaction
+model WorkTransactionColor {
+  id                String   @id @default(cuid())
+  workTransactionId String
+  colorId           String?
+  colorNameSnapshot String
+
+  heads             Int
+  piecesPerHead     Int
+  givenPieces       Int      // heads * piecesPerHead
+
+  returnedPieces    Int      @default(0)
+  damagedPieces     Int      @default(0)
+
+  rate              Decimal  @default(0) @db.Decimal(10, 2)
+  amount            Decimal  @default(0) @db.Decimal(10, 2) // givenPieces * rate
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  workTransaction   WorkTransaction @relation(fields: [workTransactionId], references: [id], onDelete: Cascade)
+  color             ColorMaster?    @relation(fields: [colorId], references: [id])
+
+  @@index([workTransactionId])
+  @@index([colorId])
+}
+
+// Worker Payment / Cash Ledger
+model Payment {
+  id            String   @id @default(cuid())
+  customerId    String
+
+  fromDate      DateTime
+  toDate        DateTime
+
+  paymentDate   DateTime
+  paymentAmount Decimal  @db.Decimal(10, 2)
+
+  notes         String?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  customer      Customer @relation(fields: [customerId], references: [id])
+  allocations   PaymentAllocation[]
+
+  @@index([customerId])
+  @@index([paymentDate])
+  @@index([fromDate])
+  @@index([toDate])
+}
+
+// Junction: Payment to Work Issue Allocations
+model PaymentAllocation {
+  id                String          @id @default(cuid())
+  paymentId         String
+  workTransactionId String
+  allocatedAmount   Decimal         @db.Decimal(10, 2)
+  createdAt         DateTime        @default(now())
+
+  payment           Payment         @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  workTransaction   WorkTransaction @relation(fields: [workTransactionId], references: [id])
+
+  @@unique([paymentId, workTransactionId])
+  @@index([paymentId])
+  @@index([workTransactionId])
+}
