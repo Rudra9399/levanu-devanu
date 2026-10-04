@@ -16,6 +16,7 @@ import {
   GitPullRequest,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { InstallAppButton } from "@/components/pwa/InstallAppButton";
 
 const SIDEBAR_ITEMS = [
   {
@@ -139,6 +140,9 @@ export function DesktopSidebar() {
           );
         })}
       </nav>
+
+      {/* Install Desktop App Card */}
+      <InstallAppButton className="border-t border-slate-100" />
 
       {/* Bottom User Profile */}
       <div className="p-3 border-t border-slate-100">

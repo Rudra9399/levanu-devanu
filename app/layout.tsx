@@ -19,6 +19,16 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Devanu-Lenvanu — Work & Piece Ledger",
   description: "Internal record-keeping register for cutting pieces, returns and hisab calculation",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Devanu-Lenvanu",
+  },
 };
 
 export const viewport: Viewport = {

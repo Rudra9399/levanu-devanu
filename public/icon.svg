@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1e3a8a" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Background Rounded Squircle -->
+  <rect width="512" height="512" rx="128" fill="url(#blueGrad)" />
+
+  <!-- Inner subtle border -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="none" stroke="#ffffff" stroke-opacity="0.15" stroke-width="8" />
+
+  <!-- Monogram DL with clean modern typography -->
+  <g filter="url(#shadow)" fill="#ffffff">
+    <!-- Letter D -->
+    <path d="M120 140 H 210 C 265 140 300 175 300 240 C 300 305 265 340 210 340 H 120 V 140 Z M 168 184 V 296 H 206 C 238 296 254 276 254 240 C 254 204 238 184 206 184 H 168 Z" />
+    
+    <!-- Letter L overlapping slightly -->
+    <path d="M 285 190 H 330 V 328 H 400 V 368 H 285 V 190 Z" />
+  </g>
+
+  <!-- Sub-label/motif indicator -->
+  <circle cx="390" cy="165" r="22" fill="#60a5fa" />
+</svg>
