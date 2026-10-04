@@ -522,17 +522,17 @@ export function ReportsManager({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-2.5 self-start sm:self-auto">
+        <div className="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={handlePrint}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm shadow-2xs transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm shadow-2xs transition-all cursor-pointer"
           >
             <Printer className="w-4 h-4" />
-            <span>Print Report</span>
+            <span>Print</span>
           </button>
           <button
             onClick={handleExportCSV}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm shadow-blue-500/25 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm shadow-blue-500/25 active:scale-95 transition-all cursor-pointer"
           >
             <Download className="w-4 h-4" />
             <span>Export CSV</span>
@@ -540,14 +540,14 @@ export function ReportsManager({
         </div>
       </div>
 
-      {/* 4 Report Navigation Tabs */}
-      <div className="flex items-center gap-2 p-1.5 bg-slate-200/60 rounded-2xl print:hidden">
+      {/* 4 Report Navigation Tabs (Smooth horizontal scrolling on mobile, full width on desktop) */}
+      <div className="flex items-center gap-1.5 p-1.5 bg-slate-200/70 rounded-2xl overflow-x-auto no-scrollbar print:hidden">
         <button
           onClick={() => {
             setActiveTab("monthly");
             setCurrentPage(1);
           }}
-          className={`flex-1 py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
+          className={`shrink-0 sm:flex-1 whitespace-nowrap py-2 sm:py-2.5 px-3.5 sm:px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all cursor-pointer ${
             activeTab === "monthly"
               ? "bg-white text-blue-600 shadow-xs"
               : "text-slate-600 hover:text-slate-900"
@@ -562,7 +562,7 @@ export function ReportsManager({
             setActiveTab("worker");
             setCurrentPage(1);
           }}
-          className={`flex-1 py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
+          className={`shrink-0 sm:flex-1 whitespace-nowrap py-2 sm:py-2.5 px-3.5 sm:px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all cursor-pointer ${
             activeTab === "worker"
               ? "bg-white text-blue-600 shadow-xs"
               : "text-slate-600 hover:text-slate-900"
@@ -577,7 +577,7 @@ export function ReportsManager({
             setActiveTab("design");
             setCurrentPage(1);
           }}
-          className={`flex-1 py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
+          className={`shrink-0 sm:flex-1 whitespace-nowrap py-2 sm:py-2.5 px-3.5 sm:px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all cursor-pointer ${
             activeTab === "design"
               ? "bg-white text-blue-600 shadow-xs"
               : "text-slate-600 hover:text-slate-900"
@@ -592,7 +592,7 @@ export function ReportsManager({
             setActiveTab("payment");
             setCurrentPage(1);
           }}
-          className={`flex-1 py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
+          className={`shrink-0 sm:flex-1 whitespace-nowrap py-2 sm:py-2.5 px-3.5 sm:px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all cursor-pointer ${
             activeTab === "payment"
               ? "bg-white text-blue-600 shadow-xs"
               : "text-slate-600 hover:text-slate-900"
@@ -603,27 +603,56 @@ export function ReportsManager({
         </button>
       </div>
 
-      {/* Filter Toolbar Card */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs print:hidden">
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-end justify-between gap-3">
-          {/* Left Dropdown Filters */}
-          <div className="flex items-center gap-3 flex-wrap">
+      {/* Filter Toolbar Card (Organized into responsive 2-column mobile rows) */}
+      <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs print:hidden">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-end gap-2.5 sm:gap-3">
+          {/* Main search bar */}
+          <div className="flex-1 relative">
+            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+              Search Report
+            </label>
+            <div className="relative">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setCurrentPage(1);
+                }}
+                placeholder="Search worker, design number..."
+                className="w-full pl-9 pr-8 py-2 text-xs font-medium rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden transition-all"
+              />
+              {search && (
+                <button
+                  type="button"
+                  onClick={() => setSearch("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Sub-Filters Grid: 2-column on mobile, inline on desktop */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-row items-end gap-2 sm:gap-3">
             {activeTab === "monthly" ? (
               <>
                 {/* Month Dropdown */}
-                <div className="w-full sm:w-44">
+                <div className="w-full sm:w-36">
                   <label className="block text-[11px] font-semibold text-slate-500 mb-1">
                     Month
                   </label>
                   <div className="relative">
-                    <Calendar className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <Calendar className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <select
                       value={selectedMonth}
                       onChange={(e) => {
                         setSelectedMonth(Number(e.target.value));
                         setCurrentPage(1);
                       }}
-                      className="w-full pl-8 pr-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+                      className="w-full pl-7 pr-2 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
                     >
                       {MONTHS.map((m) => (
                         <option key={m.value} value={m.value}>
@@ -635,19 +664,19 @@ export function ReportsManager({
                 </div>
 
                 {/* Year Dropdown */}
-                <div className="w-full sm:w-32">
+                <div className="w-full sm:w-28">
                   <label className="block text-[11px] font-semibold text-slate-500 mb-1">
                     Year
                   </label>
                   <div className="relative">
-                    <Calendar className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <Calendar className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <select
                       value={selectedYear}
                       onChange={(e) => {
                         setSelectedYear(Number(e.target.value));
                         setCurrentPage(1);
                       }}
-                      className="w-full pl-8 pr-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden font-mono"
+                      className="w-full pl-7 pr-2 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden font-mono"
                     >
                       {YEARS.map((y) => (
                         <option key={y} value={y}>
@@ -661,7 +690,7 @@ export function ReportsManager({
             ) : (
               /* Custom Date Range for Worker / Design / Payment Tabs */
               <>
-                <div className="w-full sm:w-40">
+                <div className="w-full sm:w-36">
                   <label className="block text-[11px] font-semibold text-slate-500 mb-1">
                     From Date
                   </label>
@@ -672,10 +701,10 @@ export function ReportsManager({
                       setCustomFromDate(e.target.value);
                       setCurrentPage(1);
                     }}
-                    className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+                    className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
                   />
                 </div>
-                <div className="w-full sm:w-40">
+                <div className="w-full sm:w-36">
                   <label className="block text-[11px] font-semibold text-slate-500 mb-1">
                     To Date
                   </label>
@@ -686,26 +715,26 @@ export function ReportsManager({
                       setCustomToDate(e.target.value);
                       setCurrentPage(1);
                     }}
-                    className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+                    className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
                   />
                 </div>
               </>
             )}
 
             {/* Worker Filter Dropdown */}
-            <div className="w-full sm:w-48">
+            <div className="col-span-2 sm:col-span-1 w-full sm:w-44">
               <label className="block text-[11px] font-semibold text-slate-500 mb-1">
                 Worker
               </label>
               <div className="relative">
-                <User className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <User className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <select
                   value={selectedWorkerId}
                   onChange={(e) => {
                     setSelectedWorkerId(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full pl-8 pr-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+                  className="w-full pl-7 pr-2 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
                 >
                   <option value="">All Workers</option>
                   {workers.map((w) => (
@@ -717,38 +746,6 @@ export function ReportsManager({
               </div>
             </div>
           </div>
-
-          {/* Right Search Input & Search Button */}
-          <div className="flex items-center gap-2 w-full lg:w-auto">
-            <div className="relative flex-1 sm:w-72">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              <input
-                type="search"
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setCurrentPage(1);
-                }}
-                placeholder="Search report (worker, design, etc)..."
-                className="w-full pl-9 pr-4 py-2 text-xs font-medium rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden transition-all"
-              />
-              {search && (
-                <button
-                  onClick={() => setSearch("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-
-            <button
-              type="button"
-              className="px-5 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-500/20 transition-all shrink-0 cursor-pointer"
-            >
-              Search
-            </button>
-          </div>
         </div>
       </div>
 
@@ -757,88 +754,100 @@ export function ReportsManager({
       {/* ========================================================= */}
       {activeTab === "monthly" && (
         <div className="space-y-6">
-          {/* 4 Summary Metric Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* 4 Summary Metric Cards (2 per row on mobile) */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
             {/* Card 1: TOTAL GIVEN PIECES */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-              <div>
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+              <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-                    <FileText className="w-5 h-5" />
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 truncate">
+                    Given Pieces
+                  </span>
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                    <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                 </div>
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mt-3">
-                  TOTAL GIVEN PIECES
-                </p>
-                <p className="text-3xl font-black text-blue-600 tracking-tight mt-0.5 font-mono">
-                  {formatNumber(monthlyTotals.given)}
-                </p>
-                <p className="text-xs text-slate-400 mt-1">
-                  {monthlyTotals.totalOrders} order(s) issued
-                </p>
+                <div>
+                  <p className="text-xl sm:text-3xl font-black text-blue-600 tracking-tight leading-none font-mono">
+                    {formatNumber(monthlyTotals.given)}
+                  </p>
+                  <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">
+                    {monthlyTotals.totalOrders} order(s) issued
+                  </p>
+                </div>
               </div>
+              <div className="h-1 w-6 sm:w-8 bg-blue-500 rounded-full mt-2.5" />
             </div>
 
             {/* Card 2: RETURNED PIECES */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-              <div>
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+              <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5" />
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-600 truncate">
+                    Returned Pieces
+                  </span>
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                 </div>
-                <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 mt-3">
-                  RETURNED PIECES
-                </p>
-                <p className="text-3xl font-black text-emerald-600 tracking-tight mt-0.5 font-mono">
-                  {formatNumber(monthlyTotals.returned)}
-                </p>
-                <p className="text-xs text-slate-400 mt-1">
-                  {monthlyTotals.damaged > 0
-                    ? `${monthlyTotals.damaged} damaged`
-                    : "0 damaged"}
-                </p>
+                <div>
+                  <p className="text-xl sm:text-3xl font-black text-emerald-600 tracking-tight leading-none font-mono">
+                    {formatNumber(monthlyTotals.returned)}
+                  </p>
+                  <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">
+                    {monthlyTotals.damaged > 0
+                      ? `${monthlyTotals.damaged} damaged`
+                      : "0 damaged"}
+                  </p>
+                </div>
               </div>
+              <div className="h-1 w-6 sm:w-8 bg-emerald-500 rounded-full mt-2.5" />
             </div>
 
             {/* Card 3: GROSS BILLING (₹) */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-              <div>
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+              <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
-                    <Layers className="w-5 h-5" />
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-purple-600 truncate">
+                    Gross Billing
+                  </span>
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                    <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                 </div>
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mt-3">
-                  GROSS BILLING (₹)
-                </p>
-                <p className="text-3xl font-black text-indigo-600 tracking-tight mt-0.5 font-mono">
-                  {formatCurrency(monthlyTotals.billing)}
-                </p>
-                <p className="text-xs text-slate-400 mt-1">
-                  Paid: {formatCurrency(monthlyTotals.paid)}
-                </p>
+                <div>
+                  <p className="text-xl sm:text-3xl font-black text-indigo-600 tracking-tight leading-none font-mono">
+                    {formatCurrency(monthlyTotals.billing)}
+                  </p>
+                  <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">
+                    Paid: {formatCurrency(monthlyTotals.paid)}
+                  </p>
+                </div>
               </div>
+              <div className="h-1 w-6 sm:w-8 bg-purple-500 rounded-full mt-2.5" />
             </div>
 
             {/* Card 4: BALANCE DUE (₹) */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-              <div>
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+              <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
-                    <IndianRupee className="w-5 h-5" />
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-rose-600 truncate">
+                    Balance Due
+                  </span>
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+                    <IndianRupee className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                 </div>
-                <p className="text-xs font-bold uppercase tracking-wider text-rose-600 mt-3">
-                  BALANCE DUE (₹)
-                </p>
-                <p className="text-3xl font-black text-rose-600 tracking-tight mt-0.5 font-mono">
-                  {formatCurrency(monthlyTotals.outstanding)}
-                </p>
-                <p className="text-xs text-slate-400 mt-1">
-                  {monthlyTotals.outsidePieces} pcs outside
-                </p>
+                <div>
+                  <p className="text-xl sm:text-3xl font-black text-rose-600 tracking-tight leading-none font-mono">
+                    {formatCurrency(monthlyTotals.outstanding)}
+                  </p>
+                  <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">
+                    {monthlyTotals.outsidePieces} pcs outside
+                  </p>
+                </div>
               </div>
+              <div className="h-1 w-6 sm:w-8 bg-rose-500 rounded-full mt-2.5" />
             </div>
           </div>
 

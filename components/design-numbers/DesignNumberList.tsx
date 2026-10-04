@@ -186,78 +186,90 @@ export function DesignNumberList({ designs }: DesignNumberListProps) {
         </p>
       </div>
 
-      {/* 4 Summary Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 4 Summary Stat Cards (2 per row on mobile) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
         {/* Card 1: TOTAL DESIGNS */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-                <Layers className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 truncate">
+                Total Designs
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mt-3">
-              TOTAL DESIGNS
-            </p>
-            <p className="text-3xl font-black text-slate-900 tracking-tight mt-0.5">
-              {totalCount}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Registered design numbers</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none font-mono">
+                {totalCount}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Registered designs</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-blue-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 2: ACTIVE */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                <CheckCircle2 className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-600 truncate">
+                Active
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 mt-3">
-              ACTIVE
-            </p>
-            <p className="text-3xl font-black text-slate-900 tracking-tight mt-0.5">
-              {activeCount}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Available for work issue</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none font-mono">
+                {activeCount}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Available for issue</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-emerald-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 3: INACTIVE */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
-                <XCircle className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 truncate">
+                Inactive
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+                <XCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mt-3">
-              INACTIVE
-            </p>
-            <p className="text-3xl font-black text-slate-900 tracking-tight mt-0.5">
-              {inactiveCount}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Archived design numbers</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none font-mono">
+                {inactiveCount}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Archived designs</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-rose-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 4: WORK ORDERS */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
-                <Link2 className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 truncate">
+                Work Orders
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                <Link2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mt-3">
-              WORK ORDERS
-            </p>
-            <p className="text-3xl font-black text-slate-900 tracking-tight mt-0.5">
-              {totalTransactionsLinked}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Total linked work orders</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none font-mono">
+                {totalTransactionsLinked}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Linked work orders</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-purple-500 rounded-full mt-2.5" />
         </div>
       </div>
 

@@ -249,90 +249,98 @@ export function CustomerList({ initialCustomers }: CustomerListProps) {
         </Link>
       </div>
 
-      {/* 4 Top KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 4 Top KPI Cards (2 per row on mobile) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
         {/* Card 1: TOTAL WORKERS */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-                <Users className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-blue-600 truncate">
+                Total Workers
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-blue-600 mt-3">
-              TOTAL WORKERS
-            </p>
-            <p className="text-3xl font-black text-slate-900 tracking-tight mt-0.5">
-              {totalCount}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">
-              {activeCount} active • {inactiveCount} inactive
-            </p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none font-mono">
+                {totalCount}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">
+                {activeCount} active • {inactiveCount} inactive
+              </p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-blue-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 2: ACTIVE JOB WORK */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center">
-                <FileText className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-600 truncate">
+                Active Orders
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
+                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-amber-600 mt-3">
-              ACTIVE JOB WORK
-            </p>
-            <p className="text-3xl font-black text-slate-900 tracking-tight mt-0.5">
-              {withWorkCount}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Workers with active orders</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none font-mono">
+                {withWorkCount}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Workers with active orders</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-amber-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 3: PIECES OUTSIDE */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
-                <Package className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-purple-600 truncate">
+                Pieces Outside
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-purple-600 mt-3">
-              PIECES OUTSIDE
-            </p>
-            <p className="text-3xl font-black text-indigo-600 tracking-tight mt-0.5">
-              {formatNumber(totalOutsidePieces)}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Pending return across all workers</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-indigo-600 tracking-tight leading-none font-mono">
+                {formatNumber(totalOutsidePieces)}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Pending return</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-purple-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 4: LIVE OUTSTANDING */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                <IndianRupee className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-600 truncate">
+                Outstanding
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <IndianRupee className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 mt-3">
-              LIVE OUTSTANDING
-            </p>
-            <p className="text-3xl font-black text-emerald-700 tracking-tight mt-0.5 font-mono">
-              {formatCurrency(totalOutstanding)}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Payable balance due</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-emerald-700 tracking-tight leading-none font-mono">
+                {formatCurrency(totalOutstanding)}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Payable balance due</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-emerald-500 rounded-full mt-2.5" />
         </div>
       </div>
 
       {/* Filter & Search Bar Row */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs">
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-end gap-3">
+      <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-end gap-2.5 sm:gap-3">
           {/* Main search input */}
           <div className="flex-1 relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -341,86 +349,89 @@ export function CustomerList({ initialCustomers }: CustomerListProps) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search worker name, 10-digit phone, or area..."
-              className="w-full pl-9 pr-4 py-2.5 text-xs font-medium rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden transition-all"
+              className="w-full pl-9 pr-8 py-2 text-xs font-medium rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden transition-all"
             />
             {searchQuery && (
               <button
+                type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
 
-          {/* Status Dropdown */}
-          <div className="w-full sm:w-36">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Status
-            </label>
-            <select
-              value={statusDropdown}
-              onChange={(e) => setStatusDropdown(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
-            >
-              <option value="ALL">All Workers</option>
-              <option value="ACTIVE">Active</option>
-              <option value="INACTIVE">Inactive</option>
-            </select>
-          </div>
+          {/* Sub-Filters Grid (2 cols on mobile, flex on desktop) */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-row items-end gap-2 sm:gap-3">
+            {/* Status Dropdown */}
+            <div className="w-full sm:w-36">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Status
+              </label>
+              <select
+                value={statusDropdown}
+                onChange={(e) => setStatusDropdown(e.target.value)}
+                className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+              >
+                <option value="ALL">All Workers</option>
+                <option value="ACTIVE">Active</option>
+                <option value="INACTIVE">Inactive</option>
+              </select>
+            </div>
 
-          {/* Outstanding Dropdown */}
-          <div className="w-full sm:w-36">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Outstanding
-            </label>
-            <select
-              value={outstandingDropdown}
-              onChange={(e) => setOutstandingDropdown(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
-            >
-              <option value="ALL">All</option>
-              <option value="WITH_BALANCE">With Balance</option>
-              <option value="ZERO_BALANCE">Zero Balance</option>
-            </select>
-          </div>
+            {/* Outstanding Dropdown */}
+            <div className="w-full sm:w-36">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Outstanding
+              </label>
+              <select
+                value={outstandingDropdown}
+                onChange={(e) => setOutstandingDropdown(e.target.value)}
+                className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+              >
+                <option value="ALL">All</option>
+                <option value="WITH_BALANCE">With Balance</option>
+                <option value="ZERO_BALANCE">Zero Balance</option>
+              </select>
+            </div>
 
-          {/* Area / City Dropdown */}
-          <div className="w-full sm:w-40">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Area / City
-            </label>
-            <select
-              value={areaDropdown}
-              onChange={(e) => setAreaDropdown(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
-            >
-              <option value="ALL">All</option>
-              {distinctAreas.map((area) => (
-                <option key={area} value={area}>
-                  {area}
-                </option>
-              ))}
-            </select>
+            {/* Area / City Dropdown */}
+            <div className="col-span-2 sm:col-span-1 w-full sm:w-40">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Area / City
+              </label>
+              <select
+                value={areaDropdown}
+                onChange={(e) => setAreaDropdown(e.target.value)}
+                className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+              >
+                <option value="ALL">All Areas</option>
+                {distinctAreas.map((area) => (
+                  <option key={area} value={area}>
+                    {area}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-2 pt-1 lg:pt-0">
-            <button
-              onClick={handleClear}
-              type="button"
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Clear</span>
-            </button>
-            <button
-              type="button"
-              className="px-5 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-500/20 transition-all"
-            >
-              Search
-            </button>
-          </div>
+          {(searchQuery ||
+            statusDropdown !== "ALL" ||
+            outstandingDropdown !== "ALL" ||
+            areaDropdown !== "ALL") && (
+            <div className="flex items-center gap-2 pt-1 lg:pt-0">
+              <button
+                onClick={handleClear}
+                type="button"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Clear</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

@@ -257,87 +257,96 @@ export function PaymentList({
         </Link>
       </div>
 
-      {/* 4 Top Metric KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 4 Top Metric KPI Cards (2 per row on mobile) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
         {/* Card 1: TOTAL DISBURSED */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                <IndianRupee className="w-5 h-5" />
-              </div>
-              <span className="p-1 rounded-md text-emerald-600 bg-emerald-50">
-                <TrendingUp className="w-4 h-4" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-600 truncate">
+                Disbursed
               </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <IndianRupee className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 mt-3">
-              TOTAL DISBURSED
-            </p>
-            <p className="text-3xl font-black text-emerald-700 tracking-tight mt-0.5 font-mono">
-              {formatCurrency(totalAmountPaid)}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Total payments to workers</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-emerald-700 tracking-tight leading-none font-mono">
+                {formatCurrency(totalAmountPaid)}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Total paid to workers</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-emerald-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 2: PAYMENTS RECORDED */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-                <FileText className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-blue-600 truncate">
+                Payments
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-blue-600 mt-3">
-              PAYMENTS RECORDED
-            </p>
-            <p className="text-3xl font-black text-slate-900 tracking-tight mt-0.5">
-              {initialPayments.length}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Total payment entries</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none font-mono">
+                {initialPayments.length}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Total payment entries</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-blue-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 3: WORKERS PAID */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
-                <Users className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-purple-600 truncate">
+                Workers Paid
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-purple-600 mt-3">
-              WORKERS PAID
-            </p>
-            <p className="text-3xl font-black text-slate-900 tracking-tight mt-0.5">
-              {uniqueWorkersPaid}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Workers with settlements</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none font-mono">
+                {uniqueWorkersPaid}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Workers settled</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-purple-500 rounded-full mt-2.5" />
         </div>
 
         {/* Card 4: PENDING PAYMENT */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs relative flex flex-col justify-between">
-          <div>
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-                <FileText className="w-5 h-5" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-600 truncate">
+                Pending
+              </span>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-amber-600 mt-3">
-              PENDING PAYMENT
-            </p>
-            <p className="text-3xl font-black text-amber-700 tracking-tight mt-0.5 font-mono">
-              {formatCurrency(totalPendingAmount)}
-            </p>
-            <p className="text-xs text-slate-400 mt-1">Outstanding worker amount</p>
+            <div>
+              <p className="text-xl sm:text-3xl font-black text-amber-700 tracking-tight leading-none font-mono">
+                {formatCurrency(totalPendingAmount)}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Outstanding amount</p>
+            </div>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-amber-500 rounded-full mt-2.5" />
         </div>
       </div>
 
       {/* Filter & Search Bar Row */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs">
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-end gap-3">
+      <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-end gap-2.5 sm:gap-3">
           {/* Worker Search */}
           <div className="flex-1">
             <label className="block text-[11px] font-semibold text-slate-500 mb-1">
@@ -353,12 +362,13 @@ export function PaymentList({
                   setCurrentPage(1);
                 }}
                 placeholder="Search worker name or phone number..."
-                className="w-full pl-9 pr-4 py-2.5 text-xs font-medium rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden transition-all"
+                className="w-full pl-9 pr-8 py-2 text-xs font-medium rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden transition-all"
               />
               {searchWorker && (
                 <button
+                  type="button"
                   onClick={() => setSearchWorker("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -366,80 +376,83 @@ export function PaymentList({
             </div>
           </div>
 
-          {/* Start Date */}
-          <div className="w-full sm:w-36">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Start Date
-            </label>
-            <div className="relative">
-              <input
-                type="date"
-                value={startDate}
+          {/* Sub-Filters: 2-column on mobile, inline on desktop */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-row items-end gap-2 sm:gap-3">
+            {/* Worker Dropdown */}
+            <div className="col-span-2 sm:col-span-1 w-full sm:w-44">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Worker
+              </label>
+              <select
+                value={workerFilter}
                 onChange={(e) => {
-                  setStartDate(e.target.value);
+                  setWorkerFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden"
-              />
+                className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden"
+              >
+                <option value="ALL">All Workers</option>
+                {workerOptions.map((w) => (
+                  <option key={w.id} value={w.id}>
+                    {w.name}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
 
-          {/* End Date */}
-          <div className="w-full sm:w-36">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              End Date
-            </label>
-            <div className="relative">
-              <input
-                type="date"
-                value={endDate}
+            {/* Start Date */}
+            <div className="w-full sm:w-36">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Start Date
+              </label>
+              <div className="relative">
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => {
+                    setStartDate(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden"
+                />
+              </div>
+            </div>
+
+            {/* End Date */}
+            <div className="w-full sm:w-36">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                End Date
+              </label>
+              <div className="relative">
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => {
+                    setEndDate(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden"
+                />
+              </div>
+            </div>
+
+            {/* Payment Status Dropdown */}
+            <div className="col-span-2 sm:col-span-1 w-full sm:w-36">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Payment Status
+              </label>
+              <select
+                value={paymentStatus}
                 onChange={(e) => {
-                  setEndDate(e.target.value);
+                  setPaymentStatus(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden"
-              />
+                className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden"
+              >
+                <option value="ALL">All Payments</option>
+                <option value="COMPLETED">Completed</option>
+              </select>
             </div>
-          </div>
-
-          {/* Worker Dropdown */}
-          <div className="w-full sm:w-44">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Worker
-            </label>
-            <select
-              value={workerFilter}
-              onChange={(e) => {
-                setWorkerFilter(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden"
-            >
-              <option value="ALL">All Workers</option>
-              {workerOptions.map((w) => (
-                <option key={w.id} value={w.id}>
-                  {w.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Payment Status Dropdown */}
-          <div className="w-full sm:w-36">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Payment Status
-            </label>
-            <select
-              value={paymentStatus}
-              onChange={(e) => {
-                setPaymentStatus(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-hidden"
-            >
-              <option value="ALL">All Payments</option>
-              <option value="COMPLETED">Completed</option>
-            </select>
           </div>
 
           {/* Clear button */}

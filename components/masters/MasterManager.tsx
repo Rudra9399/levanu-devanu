@@ -363,7 +363,7 @@ export function MasterManager({
         </div>
 
         {/* Search & Status Filter Row */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-2.5 sm:gap-3">
           <div className="flex-1 relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
@@ -374,12 +374,13 @@ export function MasterManager({
                 setCurrentPage(1);
               }}
               placeholder={currentTabInfo.searchPlaceholder}
-              className="w-full pl-9 pr-4 py-2.5 text-xs font-medium rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden transition-all"
+              className="w-full pl-9 pr-8 py-2 text-xs font-medium rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden transition-all"
             />
             {search && (
               <button
+                type="button"
                 onClick={() => setSearch("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -398,7 +399,7 @@ export function MasterManager({
               }}
               className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
             >
-              <option value="ALL">All</option>
+              <option value="ALL">All Status</option>
               <option value="ACTIVE">Active</option>
               <option value="INACTIVE">Inactive</option>
             </select>

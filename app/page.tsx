@@ -206,73 +206,85 @@ export default async function DashboardPage() {
       </div>
 
       {/* Top 4 Primary KPI Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
         {/* Card 1: Active Workers */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2">
+        <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-1.5 flex flex-col justify-between hover:border-slate-300 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+            <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider truncate">
               Active Workers
             </span>
-            <Users className="w-4 h-4 text-blue-600" />
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </div>
           </div>
           <div>
-            <p className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+            <p className="text-xl sm:text-3xl font-black text-slate-900 font-mono tracking-tight leading-none">
               {activeWorkersCount}
             </p>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              {totalWorkersCount} total registered workers
+            <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">
+              {totalWorkersCount} registered
             </p>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-blue-500 rounded-full" />
         </div>
 
         {/* Card 2: Today's Issue */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2">
+        <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-1.5 flex flex-col justify-between hover:border-slate-300 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider">
+            <span className="text-[10px] sm:text-xs font-bold text-indigo-600 uppercase tracking-wider truncate">
               Today Issued
             </span>
-            <Scissors className="w-4 h-4 text-indigo-600" />
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+              <Scissors className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </div>
           </div>
           <div>
-            <p className="text-2xl sm:text-3xl font-black text-indigo-700 font-mono">
+            <p className="text-xl sm:text-3xl font-black text-indigo-700 font-mono tracking-tight leading-none">
               {formatNumber(todayPiecesIssued)}
             </p>
-            <p className="text-[11px] text-slate-400 mt-0.5">Pieces dispatched today</p>
+            <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Dispatched today</p>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-indigo-500 rounded-full" />
         </div>
 
         {/* Card 3: Outside Pieces */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2">
+        <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-1.5 flex flex-col justify-between hover:border-slate-300 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-amber-600 uppercase tracking-wider">
+            <span className="text-[10px] sm:text-xs font-bold text-amber-600 uppercase tracking-wider truncate">
               Pieces Outside
             </span>
-            <Clock className="w-4 h-4 text-amber-600" />
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </div>
           </div>
           <div>
-            <p className="text-2xl sm:text-3xl font-black text-amber-700 font-mono">
+            <p className="text-xl sm:text-3xl font-black text-amber-700 font-mono tracking-tight leading-none">
               {formatNumber(totalOutsidePieces)}
             </p>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              {allPendingOrders.length} pending work order(s)
+            <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">
+              {allPendingOrders.length} pending orders
             </p>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-amber-500 rounded-full" />
         </div>
 
         {/* Card 4: Outstanding Payment */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2">
+        <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-1.5 flex flex-col justify-between hover:border-slate-300 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-red-600 uppercase tracking-wider">
-              Outstanding Hisab
+            <span className="text-[10px] sm:text-xs font-bold text-red-600 uppercase tracking-wider truncate">
+              Outstanding
             </span>
-            <IndianRupee className="w-4 h-4 text-red-600" />
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+              <IndianRupee className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </div>
           </div>
           <div>
-            <p className="text-2xl sm:text-3xl font-black text-red-700 font-mono">
+            <p className="text-xl sm:text-3xl font-black text-red-700 font-mono tracking-tight leading-none">
               {formatCurrency(outstandingLifetime)}
             </p>
-            <p className="text-[11px] text-slate-400 mt-0.5">Net unpaid balance due</p>
+            <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1 truncate">Unpaid balance due</p>
           </div>
+          <div className="h-1 w-6 sm:w-8 bg-red-500 rounded-full" />
         </div>
       </div>
 

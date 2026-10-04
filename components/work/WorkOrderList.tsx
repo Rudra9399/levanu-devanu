@@ -398,81 +398,84 @@ export function WorkOrderList({
             </div>
           </div>
 
-          {/* Status Dropdown */}
-          <div className="w-full sm:w-36">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Status
-            </label>
-            <select
-              value={statusFilter}
-              onChange={(e) => {
-                setStatusFilter(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
-            >
-              <option value="ALL">All Status</option>
-              <option value="PENDING">Pending</option>
-              <option value="PARTIAL">Partial</option>
-              <option value="COMPLETED">Completed</option>
-            </select>
-          </div>
-
-          {/* Worker Dropdown */}
-          <div className="w-full sm:w-40">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Worker
-            </label>
-            <select
-              value={workerFilter}
-              onChange={(e) => {
-                setWorkerFilter(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
-            >
-              <option value="ALL">All Workers</option>
-              {workers.map((w) => (
-                <option key={w.id} value={w.id}>
-                  {w.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Start Date */}
-          <div className="w-full sm:w-36">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              Start Date
-            </label>
-            <div className="relative">
-              <input
-                type="date"
-                value={startDate}
+          {/* Sub-Filters Grid: 2-columns on mobile, inline-flex on desktop */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-row items-end gap-2 sm:gap-3">
+            {/* Status Dropdown */}
+            <div className="w-full sm:w-36">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Status
+              </label>
+              <select
+                value={statusFilter}
                 onChange={(e) => {
-                  setStartDate(e.target.value);
+                  setStatusFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
-              />
+                className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+              >
+                <option value="ALL">All Status</option>
+                <option value="PENDING">Pending</option>
+                <option value="PARTIAL">Partial</option>
+                <option value="COMPLETED">Completed</option>
+              </select>
             </div>
-          </div>
 
-          {/* End Date */}
-          <div className="w-full sm:w-36">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-              End Date
-            </label>
-            <div className="relative">
-              <input
-                type="date"
-                value={endDate}
+            {/* Worker Dropdown */}
+            <div className="w-full sm:w-40">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Worker
+              </label>
+              <select
+                value={workerFilter}
                 onChange={(e) => {
-                  setEndDate(e.target.value);
+                  setWorkerFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
-              />
+                className="w-full px-3 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+              >
+                <option value="ALL">All Workers</option>
+                {workers.map((w) => (
+                  <option key={w.id} value={w.id}>
+                    {w.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Start Date */}
+            <div className="w-full sm:w-36">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                Start Date
+              </label>
+              <div className="relative">
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => {
+                    setStartDate(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+                />
+              </div>
+            </div>
+
+            {/* End Date */}
+            <div className="w-full sm:w-36">
+              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                End Date
+              </label>
+              <div className="relative">
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => {
+                    setEndDate(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="w-full px-2.5 py-2 text-xs font-semibold rounded-xl bg-white border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-hidden"
+                />
+              </div>
             </div>
           </div>
 
